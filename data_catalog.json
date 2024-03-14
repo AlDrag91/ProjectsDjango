@@ -1,0 +1,26 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "category": "Продукты",
+      "title": "Продукты питания,напитки"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "category": "Электроника",
+      "title": "Техника для дома, портативная электроника"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "category": "Авто",
+      "title": "Запчасть и товары  для автомобилей"
+    }
+  }
+]

@@ -1,0 +1,143 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "category": "Продукты",
+      "title": "Продукты питания,напитки"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "category": "Электроника",
+      "title": "Техника для дома, портативная электроника"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "category": "Авто",
+      "title": "Запчасть и товары  для автомобилей"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "product_name": "Хлеб",
+      "title": "Хлебобулочное изделие",
+      "image_preview": "",
+      "category": 1,
+      "purchase_price": 25,
+      "created_at": "2024-03-14T15:52:59Z",
+      "updated_at": "2024-03-14T15:52:58Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "product_name": "Молоко",
+      "title": "Молочное продукция",
+      "image_preview": "",
+      "category": 1,
+      "purchase_price": 80,
+      "created_at": "2024-03-14T15:54:02Z",
+      "updated_at": "2024-03-14T15:54:03Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "product_name": "Конфеты",
+      "title": "Кондитерское изделия",
+      "image_preview": "",
+      "category": 1,
+      "purchase_price": 100,
+      "created_at": "2024-03-14T15:54:59Z",
+      "updated_at": "2024-03-14T15:55:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "product_name": "Телевизор",
+      "title": "Медиа товар",
+      "image_preview": "",
+      "category": 2,
+      "purchase_price": 45000,
+      "created_at": "2024-03-14T15:56:13Z",
+      "updated_at": "2024-03-14T15:56:14Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "product_name": "Микроволновая печь",
+      "title": "Бытовые приборы",
+      "image_preview": "",
+      "category": 2,
+      "purchase_price": 7000,
+      "created_at": "2024-03-14T15:57:13Z",
+      "updated_at": "2024-03-14T15:57:14Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "product_name": "Смартфон",
+      "title": "мобильный телефон дополненный функциональностью умного устройства",
+      "image_preview": "",
+      "category": 2,
+      "purchase_price": 55000,
+      "created_at": "2024-03-14T15:59:03Z",
+      "updated_at": "2024-03-14T15:59:04Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "product_name": "Видеорегистратор",
+      "title": "устройство, предназначенное для видео и аудиофиксации обстановки вокруг автомобиля",
+      "image_preview": "",
+      "category": 3,
+      "purchase_price": 10000,
+      "created_at": "2024-03-14T16:00:38Z",
+      "updated_at": "2024-03-14T16:00:40Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "product_name": "Стеклоочиститель",
+      "title": "устройство, используемое для удаления капель дождя (влаги) и грязи с ветрового стекла автомобиля",
+      "image_preview": "",
+      "category": 3,
+      "purchase_price": 1000,
+      "created_at": "2024-03-14T16:02:25Z",
+      "updated_at": "2024-03-14T16:02:27Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "product_name": "Фа́ра",
+      "title": "источник направленного света с отражателем",
+      "image_preview": "",
+      "category": 3,
+      "purchase_price": 25000,
+      "created_at": "2024-03-14T16:03:22Z",
+      "updated_at": "2024-03-14T16:03:23Z"
+    }
+  }
+]
