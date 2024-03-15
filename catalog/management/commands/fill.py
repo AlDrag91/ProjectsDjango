@@ -21,7 +21,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-
         Product.objects.all().delete()
         Category.objects.all().delete()
 
