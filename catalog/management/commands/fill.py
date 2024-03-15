@@ -31,9 +31,9 @@ class Command(BaseCommand):
         # Обходим все значения категорий из фиктсуры для получения информации об одном объекте
         for category in Command.json_read_categories():
             category_for_create.append(
-                Category(**category)
+                Category(pk=category["pk"], category=category["fields"]["category"], title=category["fields"]["title"])
             )
-
+        print(product_for_create)
         # Создаем объекты в базе с помощью метода bulk_create()
         Category.objects.bulk_create(category_for_create)
         print(category_for_create)
@@ -41,7 +41,10 @@ class Command(BaseCommand):
         # Обходим все значения продуктов из фиктсуры для получения информации об одном объекте
         for product in Command.json_read_products():
             product_for_create.append(
-                Product(**product)
+                Product(pk=product["pk"], product_name=product["fields"]["product_name"],
+                        title=product["fields"]["title"], image_preview=product["fields"]["image_preview"],
+                        category=product["fields"]["category"], purchase_price=product["fields"]["purchase_price"],
+                        created_at=product["fields"]["created_at"], updated_at=product["fields"]["updated_at"])
             )
 
         # Создаем объекты в базе с помощью метода bulk_create()
