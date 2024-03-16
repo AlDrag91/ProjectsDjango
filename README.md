@@ -24,4 +24,4 @@ Django:
 6. Созданы фикстуры: python -Xutf8 manage.py dumpdata catalog -o db.json
                      python -Xutf8 manage.py dumpdata catalog.Category -o data_catalog.json
                      python -Xutf8 manage.py dumpdata catalog.Product -o data_product.json
-7. Ккастомная команда???
+7. Написана кастомная команда заполнение Category и Product
