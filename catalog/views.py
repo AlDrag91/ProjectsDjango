@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from catalog.models import Product
+from catalog.models import Product, Contact
 
 
 def index(request):
@@ -15,5 +15,6 @@ def contacts(request):
     print(request.POST.get('name'))
     print(request.POST.get('phone'))
     print(request.POST.get('message'))
+    contact = Contact.objects.all()
 
-    return render(request, 'catalog/contacts.html')
+    return render(request, 'catalog/contacts.html', {'contact': contact})
