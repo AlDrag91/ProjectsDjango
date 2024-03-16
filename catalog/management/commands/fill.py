@@ -30,7 +30,7 @@ class Command(BaseCommand):
 
         # Обходим все значения продуктов из фиктсуры для получения информации об одном объекте
         for product in data_product:
-            category_instance = Category.objects.get(category=product["fields"]["category"])
+            category_instance = Category.objects.get(id=product["fields"]["category"])
             product_for_create.append(
                 Product(pk=product["pk"], product_name=product["fields"]["product_name"],
                         title=product["fields"]["title"], image_preview=product["fields"]["image_preview"],
