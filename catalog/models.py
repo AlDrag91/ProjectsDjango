@@ -4,8 +4,8 @@ NULLABLE = {'blank': True, 'null': True}
 
 
 class Category(models.Model):
-    category = models.CharField(max_length=100)
-    title = models.CharField(max_length=100, verbose_name='описание ')
+    category = models.CharField(max_length=100, verbose_name='Категория')
+    title = models.CharField(max_length=100, verbose_name='Описание ')
 
     def __str__(self):
         return f'{self.category}'
@@ -16,11 +16,11 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    product_name = models.CharField(max_length=100, verbose_name='название продукта')
-    title = models.CharField(max_length=100, verbose_name='описание продукта')
-    image_preview = models.ImageField(upload_to='product/', verbose_name='изображение товара', **NULLABLE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    purchase_price = models.IntegerField()
+    product_name = models.CharField(max_length=100, verbose_name='Название продукта')
+    title = models.CharField(max_length=100, verbose_name='Описание продукта')
+    image_preview = models.ImageField(upload_to='product/', verbose_name='Изображение товара', **NULLABLE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
+    purchase_price = models.IntegerField(verbose_name='Стоимость')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

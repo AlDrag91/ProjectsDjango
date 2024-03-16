@@ -1,9 +1,14 @@
 from django.shortcuts import render
 
+from catalog.models import Product
 
-# Create your views here.
+
 def index(request):
-    return render(request, 'catalog/home.html')
+    latest_products = Product.objects.order_by('-created_at')[:5]
+    for product in latest_products:
+        print(f"Название товара: {product.product_name}")
+
+    return render(request, 'catalog/home2.html')
 
 
 def contacts(request):
