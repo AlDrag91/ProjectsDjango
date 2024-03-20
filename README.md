@@ -25,3 +25,11 @@ Django:
                      python -Xutf8 manage.py dumpdata catalog.Category -o data_catalog.json
                      python -Xutf8 manage.py dumpdata catalog.Product -o data_product.json
 7. Написана кастомная команда заполнение Category и Product
+
+Шаблонизация 
+В режиме разработки использую такую настройку STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+1. Создан контроллер и шаблон catalog_products 
+2. Создан шаблон страницы с карточками товаров описание обрезано до 100 знаков
+3. Выделен базовый шаблон, выделен под шаблон 
+4. Реализован шаблонный фильтр для доступа к медиафайлам

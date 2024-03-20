@@ -25,7 +25,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.product_name}, {self.category}'
+        return f'{self.product_name}, {self.category}, {self.title},{self.purchase_price}, {self.created_at}'
 
     class Meta:
         verbose_name = 'продукт'
@@ -38,4 +38,4 @@ class Contact(models.Model):
     message = models.TextField()
 
     def __str__(self):
-        return self.name
+        return f'{self.name}, {self.phone}, {self.message}'
