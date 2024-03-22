@@ -1,4 +1,5 @@
 {% load static %}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
 
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'css/bootstrap.min.css'%}/" rel="stylesheet"
+    <link href="{% static 'css/bootstrap.min.css' %}/" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Favicons -->
@@ -18,17 +19,17 @@
 
     <style>
         .bd-placeholder-img {
-          font-size: 1.125rem;
-          text-anchor: middle;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          user-select: none;
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
         }
 
         @media (min-width: 768px) {
-          .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-          }
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
         }
     </style>
 
@@ -42,7 +43,7 @@
             <div class="row">
                 <div class="col-sm-8 col-md-7 py-4">
                     <h4 class="text-white">CataLog</h4>
-                    <p class="text-muted">Проект CataLog. Просмотр товаров</p>
+                    <p class="text-muted">{{ title }}</p>
                 </div>
                 {% include 'catalog/includes/inc_catalog_menu.html' %}
             </div>
@@ -72,7 +73,7 @@
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Проект CataLog.</h1>
+                <h1 class="fw-light">{{ title }}</h1>
                 <p class="lead text-muted">Функционал кнопок пока не подъехал!</p>
                 <p>
                     <a href="#" class="btn btn-primary my-2">Синяя кнопка</a>
@@ -83,21 +84,22 @@
     </section>
 
     <div class="album py-5 bg-light">
-        <div class="container">
+        <div class="center-screen">
+            <div class="container">
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 {% block content %}
                 {% endblock %}
+                </div>
             </div>
         </div>
     </div>
-
 </main>
 
 <footer class="text-muted py-5">
     <div class="container">
         <p class="float-end mb-1">
-            <a href="/home/">Главная страница</a>
+            <a href="{% url 'catalog:index' %}">Главная страница</a>
         </p>
         <p class="mb-1">Album example is &copy; AlDrag91 {% now 'Y' %}</p>
     </div>
