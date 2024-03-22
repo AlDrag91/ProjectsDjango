@@ -4,12 +4,9 @@ from catalog.models import Product, Contact
 
 
 def index(request):
-    catalog = Product.objects.get(pk=1)
-    # latest_products = Product.objects.order_by('-created_at')[:5]
-    # for product in latest_products:
-    #     print(f"Название товара: {product.product_name}")
+    catalog = Product.objects.all()
     context = {
-        'one_catalog': catalog,
+        'catalog': catalog,
         'title': 'Главная'
     }
 
