@@ -4,12 +4,15 @@ from catalog.models import Product, Contact
 
 
 def index(request):
+    catalog = Product.objects.all()[:1]
     latest_products = Product.objects.order_by('-created_at')[:5]
     for product in latest_products:
         print(f"Название товара: {product.product_name}")
     context = {
+        'one_catalog': catalog,
         'title': 'Главная'
     }
+
 
     return render(request, 'catalog/home2.html', context)
 
