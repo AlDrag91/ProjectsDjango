@@ -9,3 +9,4 @@ def mymedia(val):
     if val:
         return f'/media/{val}'
     return '/static/no_image.png'
+

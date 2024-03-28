@@ -1,0 +1,34 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+{% for object in blog %}
+<div class="col">
+    <div class="card shadow-sm">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+             preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+            <image height="100%" width="100%" xlink:href="{{ object.image_preview|mymedia }}"/>
+
+        </svg>
+    </div>
+    <div class="col">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title">{{ object.title|title }}</h3>
+                <p class="card-text">{{ object.content }}</p>
+                <p class="card-text">Создан: {{ object.created_at }}</p>
+                <p class="card-text">Просмотров: {{ object.views_count }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a href="{% url 'catalog:blog_update' object.pk %}" class="btn btn-sm btn-outline-warning">Изменить</a>
+                        <a href="{% url 'catalog:blog_delete' object.pk %}" class="btn btn-sm btn-outline-danger">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endfor %}
+{% endblock %}
