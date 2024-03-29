@@ -44,14 +44,18 @@ class ProductListView(ListView):
 
 class BlogListView(ListView):
     model = Blog
-    blog_list = Blog.objects.filter(is_published=True)
-    extra_context = {
-        'blog': blog_list,
-        'title': 'Блоги'
-    }
 
-
-
+    # blog_list = Blog.objects.filter(is_published=True)
+    # extra_context = {
+    #     'blog': blog_list,
+    #     'title': 'Блоги'
+    # }
+    def get_context_data(self, *args, **kwargs):
+        contex_data = super().get_context_data(*args, **kwargs)
+        blog_list = Blog.objects.filter(is_published=True)
+        contex_data['blog'] = blog_list
+        contex_data['title'] = 'Блоги'
+        return contex_data
 
 
 class BlogDetailView(DetailView):
@@ -74,7 +78,6 @@ class BlogDetailView(DetailView):
         self.object.save()
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
-
 
 
 class BlogCreateView(CreateView):
