@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.text import slugify
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from icecream import ic
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Contact, Blog, Version
@@ -32,14 +33,15 @@ class ProductListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         contex_data = super().get_context_data(**kwargs)
-        products_item = Product.objects.all()
-        for product_name in products_item:
-            active_version = Version.objects.filter(product_name=product_name, current_version=True)
+        products_items = Product.objects.all()
+        for product_item in products_items:
+            active_version = Version.objects.filter(product_name=product_item, current_version=True)
             if active_version:
-                product_name.active_version = active_version
-                print(product_name.active_version)
-        contex_data['product'] = products_item
+                product_item.active_version = active_version.values_list('version_number', flat=True)[0]
+        contex_data['product'] = products_items
         contex_data['title'] = f'Продукты'
+        ic(product_item.active_version)
+        ic(products_items)
         return contex_data
 
 
