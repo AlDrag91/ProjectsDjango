@@ -24,9 +24,9 @@ SECRET_KEY = 'django-insecure-jllan0r+zod_gt^g-7t+nir-l+eesmn%=l6c_bonhy+m7n^$ky
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
-
+# DEBUG = False
+# ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'catalog',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# настройки почтового сервера yandex.ru (клиентский адрес gold777913@yamdex.ru)
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+# EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'gold777913@yamdex.ru'
+EMAIL_HOST_PASSWORD = "xurqrsalsdpqvwef"
+# EMAIL_HOST_PASSWORD ='ousoavmkipmqxioo'
+# получения писем об ошибках сайта
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER

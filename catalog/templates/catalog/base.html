@@ -44,6 +44,15 @@
                 <div class="col-sm-8 col-md-7 py-4">
                     <h4 class="text-white">CataLog</h4>
                     <p class="text-muted">{{ title }}</p>
+
+
+                    {% if user.is_authenticated %}
+                    <p class="text-muted">Вход выполнен Пользователь: {{user.email}}</p>
+                    {% else %}
+                    <p class="text-muted">Вход не выполнен</p>
+                    {% endif %}
+
+
                 </div>
                 {% include 'catalog/includes/inc_catalog_menu.html' %}
             </div>
@@ -90,8 +99,8 @@
             <div class="container">
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                {% block content %}
-                {% endblock %}
+                    {% block content %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
@@ -102,6 +111,7 @@
     <div class="container">
         <p class="float-end mb-1">
             <a href="{% url 'catalog:index' %}">Главная страница</a>
+            <a href="{% url 'catalog:test_mail' %}">Тест письма</a>
         </p>
         <p class="mb-1">Album example is &copy; AlDrag91 {% now 'Y' %}</p>
     </div>

@@ -1,0 +1,17 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Ошибка запроса '404'</h1>
+            <p class="lead text-muted">Авторизуйтесь или зарегистрируйтесь</p>
+            <p>
+                <a href="{% url 'users:login' %}" class="btn btn-primary my-2">Войти</a>
+                <a href="{% url 'users:register' %}" class="btn btn-primary my-2">Регистрация</a>
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

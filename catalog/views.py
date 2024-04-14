@@ -1,12 +1,24 @@
+from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.text import slugify
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from icecream import ic
-
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Contact, Blog, Version
+
+
+def test_mail(request):
+    send_mail(
+        subject='TEST',
+        message=f'Тест письма',
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=['gold777913@yndex.ru'],
+        fail_silently=False
+    )
+    return render(request, 'catalog/home.html')
 
 
 def index(request):
@@ -40,8 +52,7 @@ class ProductListView(ListView):
                 product_item.active_version = active_version.values_list('version_number', flat=True)[0]
         contex_data['product'] = products_items
         contex_data['title'] = f'Продукты'
-        ic(product_item.active_version)
-        ic(products_items)
+
         return contex_data
 
 
@@ -56,7 +67,7 @@ class ProductDetailView(DetailView):
         return contex_data
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
@@ -65,8 +76,15 @@ class ProductCreateView(CreateView):
         'title': 'Добавить Продукт'
     }
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.publisher = self.request.user
+        self.object.save()
 
-class ProductUpdateView(UpdateView):
+        return super().form_valid(form)
+
+
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')

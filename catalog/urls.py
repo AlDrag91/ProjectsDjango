@@ -1,13 +1,16 @@
+from django.shortcuts import render
 from django.urls import path
 
 from catalog.apps import CatalogConfig
 from catalog.views import index, ContactsListView, ProductListView, BlogCreateView, BlogListView, BlogDetailView, \
-    BlogUpdateView, BlogDeleteView, ProductDetailView, ProductCreateView, ProductDeleteView, ProductUpdateView
+    BlogUpdateView, BlogDeleteView, ProductDetailView, ProductCreateView, ProductDeleteView, ProductUpdateView, \
+    test_mail
 
 app_name = CatalogConfig.name
 
 urlpatterns = [
     path('', index, name='index'),
+    path('test_mail/', test_mail, name='test_mail'),
 
     path('contacts/', ContactsListView.as_view(), name='contacts'),
 
@@ -24,3 +27,5 @@ urlpatterns = [
     path('blog_delete/<int:pk>/', BlogDeleteView.as_view(), name='blog_delete')
 
 ]
+
+
