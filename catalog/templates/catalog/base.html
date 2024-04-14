@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load my_tags %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,6 +48,11 @@
 
                     {% if user.is_authenticated %}
                     <p class="text-muted">Вход выполнен Пользователь: {{user.email}}</p>
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                        <image height="50%" width="50%" xlink:href="{{ user.avatar|mymedia }}"/>
+                    </svg>
                     {% else %}
                     <p class="text-muted">Вход не выполнен</p>
                     {% endif %}
