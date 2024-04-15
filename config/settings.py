@@ -136,14 +136,14 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # настройки почтового сервера yandex.ru (клиентский адрес gold777913@yamdex.ru)
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 # EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'gold777913@yamdex.ru'
+EMAIL_HOST_USER = 'gold777913@yandex.ru'
 EMAIL_HOST_PASSWORD = "xurqrsalsdpqvwef"
 # EMAIL_HOST_PASSWORD ='ousoavmkipmqxioo'
 # получения писем об ошибках сайта

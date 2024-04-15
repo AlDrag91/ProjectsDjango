@@ -15,7 +15,7 @@ def test_mail(request):
         subject='TEST',
         message=f'Тест письма',
         from_email=settings.EMAIL_HOST_USER,
-        recipient_list=['gold777913@yndex.ru'],
+        recipient_list=['gold777913@yandex.ru'],
         fail_silently=False
     )
     return render(request, 'catalog/home.html')
@@ -188,3 +188,8 @@ class BlogDeleteView(DeleteView):
     extra_context = {
         'title': 'Удаление Блога '
     }
+
+
+def handler404(request, exception):
+    # Обработчик ошибки 404
+    return render(request, 'custom_404.html', status=404)
