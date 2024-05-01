@@ -4,6 +4,7 @@ from random import random
 import random
 
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -87,7 +88,7 @@ def password_recovery(request):
                 'Указанная почта не зарегистрированная.')
 
 
-class ProfileView(UpdateView):
+class ProfileView(LoginRequiredMixin, UpdateView):
     # Профиль пользователя
     model = User
     form_class = UserProfileForm

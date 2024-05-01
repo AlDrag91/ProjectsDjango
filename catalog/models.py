@@ -25,13 +25,19 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     publisher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Публикатор', **NULLABLE)
+    is_published = models.BooleanField(default=False, verbose_name='Публикация')
 
     def __str__(self):
-        return f'{self.product_name}, {self.category}, {self.title},{self.purchase_price}, {self.created_at}'
+        return f'{self.product_name}, {self.category}, {self.title},{self.purchase_price}, {self.created_at}, {self.is_published}'
 
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
+        permissions = [
+            ("create_publication", "изменение публикации"),
+            ("create_title", "изменение описания"),
+            ("create_category", "изменение категории")
+        ]
 
 
 class Contact(models.Model):

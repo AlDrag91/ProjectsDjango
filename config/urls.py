@@ -24,9 +24,9 @@ from users.views import VerifyEmailView
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('catalog.urls', namespace='catalog')),
-                  path('login', include('users.urls', namespace='users')),
+                  path('users/', include('users.urls', namespace='users')),
                   path('verify-email/', VerifyEmailView.as_view(), name='verify_email')
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-handler404 = 'catalog.views.handler404'
+
 
 

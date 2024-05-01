@@ -16,7 +16,7 @@ class ProductForm(FormMixin, forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['product_name', 'title', 'image_preview', 'category', 'purchase_price']
+        fields = ['product_name', 'title', 'image_preview', 'category', 'purchase_price', 'is_published']
 
     def clean_product_name(self):
         cleaned_data = self.cleaned_data['product_name']
@@ -29,6 +29,12 @@ class ProductForm(FormMixin, forms.ModelForm):
         if cleaned_data.lower() in self.an_invalid:
             raise forms.ValidationError(f'Не допустимое слово - {cleaned_data}')
         return cleaned_data
+
+
+class ProductModeratorForm(FormMixin, forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['is_published', 'title', 'category']
 
 
 class VersionForm(FormMixin, forms.ModelForm):

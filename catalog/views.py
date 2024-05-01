@@ -1,12 +1,15 @@
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mail
 from django.forms import inlineformset_factory
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.text import slugify
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Contact, Blog, Version
 
 
@@ -110,13 +113,29 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             formset.save()
         return super().form_valid(form)
 
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.publisher:
+            return ProductForm
+        if user.has_perm("catalog.create_publication") and user.has_perm("catalog.create_title") and user.has_perm(
+                "catalog.create_category"):
+            return ProductModeratorForm
+        raise PermissionDenied
 
-class ProductDeleteView(DeleteView):
+
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:product')
     extra_context = {
         'title': 'Удаление Продукт'
     }
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.request.user == self.object.publisher:
+            return super(ProductDeleteView, self).get_object()
+
+        raise PermissionDenied
 
 
 class BlogListView(ListView):
@@ -152,7 +171,7 @@ class BlogDetailView(DetailView):
         return self.render_to_response(context)
 
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
     fields = ['title', 'content', 'preview', 'is_published']
     success_url = reverse_lazy('catalog:blog')
@@ -170,7 +189,7 @@ class BlogCreateView(CreateView):
         return super().form_valid(form)
 
 
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
     fields = ['title', 'content', 'preview', 'is_published']
     extra_context = {
@@ -182,14 +201,9 @@ class BlogUpdateView(UpdateView):
         return reverse_lazy('catalog:blog_detail', args=(self.kwargs['pk'],))
 
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(LoginRequiredMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy('catalog:blog')
     extra_context = {
         'title': 'Удаление Блога '
     }
-
-
-def handler404(request, exception):
-    # Обработчик ошибки 404
-    return render(request, 'custom_404.html', status=404)

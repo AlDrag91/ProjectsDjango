@@ -135,6 +135,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/users/'
+
+
 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # настройки почтового сервера yandex.ru (клиентский адрес gold777913@yamdex.ru)
