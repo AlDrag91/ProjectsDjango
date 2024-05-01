@@ -22,14 +22,15 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <div class="btn-group">
-                            <a href="{% url 'catalog:product_update' object.pk %}"
-                               class="btn btn-sm btn-outline-warning">Изменить</a>
-                            {% if user == object.publisher %}
-                            <a href="{% url 'catalog:product_delete' object.pk %}"
-                               class="btn btn-sm btn-outline-danger">Удалить</a>
-                            {% endif %}
-
-                        </div>
+    {% if perms.product.create_publication and perms.product.create_title and perms.product.create_category or user == object.publisher %}
+        <a href="{% url 'catalog:product_update' object.pk %}" class="btn btn-sm btn-outline-warning">Edit</a>
+    {% elif user == object.publisher %}
+        <a href="{% url 'catalog:product_update' object.pk %}" class="btn btn-sm btn-outline-warning">Edit</a>
+    {% endif %}
+    {% if user == object.publisher %}
+        <a href="{% url 'catalog:product_delete' object.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+    {% endif %}
+</div>
                     </div>
                 </div>
             </div>
