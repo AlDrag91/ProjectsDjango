@@ -19,3 +19,4 @@ stack-data==0.6.3
 traitlets==5.14.2
 tzdata==2024.1
 wcwidth==0.2.13
+redis==5.0.4

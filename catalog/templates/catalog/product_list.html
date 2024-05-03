@@ -19,6 +19,7 @@
             <h5 class="card-title">{{ object.product_name|title }}</h5>
             <p class="card-text">{{ object.purchase_price }}</p>
             <p class="card-text">{{ object.title|truncatechars:100 }}</p>
+            <p class="card-text">Публикатор: {{ object.publisher }}</p>
             <p class="card-text">Активная версия: {{ object.active_version }}</p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
