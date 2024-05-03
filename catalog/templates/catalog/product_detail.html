@@ -1,0 +1,42 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="col">
+    <div class="card shadow-sm">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+             preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+            <image height="100%" width="100%" xlink:href="{{ object.image_preview|mymedia }}"/>
+
+        </svg>
+    </div>
+    <div class="col">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title">{{ object.product_name|title }}</h3>
+                <p class="card-text">{{ object.title }}</p>
+                <p class="card-text">{{ object.purchase_price }}</p>
+                <p class="card-text">Создан: {{ object.created_at }}</p>
+                <p class="card-text">Опубликован: {{ object.publisher }}</p>
+                <p class="card-text">Публикация на сайте: {{ object.is_published }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <div class="btn-group">
+    {% if perms.product.create_publication and perms.product.create_title and perms.product.create_category or user == object.publisher %}
+        <a href="{% url 'catalog:product_update' object.pk %}" class="btn btn-sm btn-outline-warning">Edit</a>
+    {% elif user == object.publisher %}
+        <a href="{% url 'catalog:product_update' object.pk %}" class="btn btn-sm btn-outline-warning">Edit</a>
+    {% endif %}
+    {% if user == object.publisher %}
+        <a href="{% url 'catalog:product_delete' object.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+    {% endif %}
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

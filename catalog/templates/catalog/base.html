@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load my_tags %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -44,6 +44,20 @@
                 <div class="col-sm-8 col-md-7 py-4">
                     <h4 class="text-white">CataLog</h4>
                     <p class="text-muted">{{ title }}</p>
+
+
+                    {% if user.is_authenticated %}
+                    <p class="text-muted">Вход выполнен Пользователь: {{user.email}}</p>
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                        <image height="50%" width="50%" xlink:href="{{ user.avatar|mymedia }}"/>
+                    </svg>
+                    {% else %}
+                    <p class="text-muted">Вход не выполнен</p>
+                    {% endif %}
+
+
                 </div>
                 {% include 'catalog/includes/inc_catalog_menu.html' %}
             </div>
@@ -51,14 +65,19 @@
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a href="#" class="navbar-brand d-flex align-items-center">
+            <a href="{% url 'catalog:index' %}" class="navbar-brand d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
                      stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"
                      viewBox="0 0 24 24">
                     <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                     <circle cx="12" cy="13" r="4"/>
                 </svg>
-                <strong>CataLog</strong>
+                <strong>
+                    CataLog
+                    {% if user.is_authenticated %}
+                    : {{user.email}}
+                    {% endif %}
+                </strong>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,10 +93,12 @@
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">{{ title }}</h1>
-                <p class="lead text-muted">Функционал кнопок пока не подъехал!</p>
+                <p class="lead text-muted">Функционал настроен!</p>
                 <p>
-                    <a href="#" class="btn btn-primary my-2">Синяя кнопка</a>
-                    <a href="#" class="btn btn-secondary my-2">Серая кнопка</a>
+                    <a href="{% url 'catalog:index' %}" class="btn btn-primary my-2">Главная</a>
+                    <a href="{% url 'catalog:product' %}" class="btn btn-primary my-2">Продукты</a>
+                    <a href="{% url 'catalog:contacts' %}" class="btn btn-primary my-2">Контакты</a>
+                    <a href="{% url 'catalog:blog' %}" class="btn btn-primary my-2">Блог</a>
                 </p>
             </div>
         </div>
@@ -88,8 +109,8 @@
             <div class="container">
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                {% block content %}
-                {% endblock %}
+                    {% block content %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
@@ -100,6 +121,7 @@
     <div class="container">
         <p class="float-end mb-1">
             <a href="{% url 'catalog:index' %}">Главная страница</a>
+            <a href="{% url 'catalog:test_mail' %}">Тест письма</a>
         </p>
         <p class="mb-1">Album example is &copy; AlDrag91 {% now 'Y' %}</p>
     </div>
@@ -109,7 +131,6 @@
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-
 
 </body>
 </html>

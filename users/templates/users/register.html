@@ -4,13 +4,13 @@
 <div class="col-6">
     <div class="card mb-4 box-shadow">
         <div class="card-header">
-            <h4 class="my-0 font-weight-normal">{{ title }}</h4>
+            <h4 class="my-0 font-weight-normal">Регистрация</h4>
         </div>
         <div class="card-body">
-            <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+            <form method="post" action="" class="form-floating">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-lg btn-block btn-outline-success">{{ button_name }}</button>
+                <button type="submit" class="btn btn-lg btn-block btn-outline-success">Регистрация</button>
             </form>
         </div>
     </div>

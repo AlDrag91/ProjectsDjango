@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 NULLABLE = {'blank': True, 'null': True}
@@ -23,13 +24,20 @@ class Product(models.Model):
     purchase_price = models.IntegerField(verbose_name='Стоимость')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    publisher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Публикатор', **NULLABLE)
+    is_published = models.BooleanField(default=False, verbose_name='Публикация')
 
     def __str__(self):
-        return f'{self.product_name}, {self.category}, {self.title},{self.purchase_price}, {self.created_at}'
+        return f'{self.product_name}, {self.category}, {self.title},{self.purchase_price}, {self.created_at}, {self.is_published}'
 
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
+        permissions = [
+            ("create_publication", "изменение публикации"),
+            ("create_title", "изменение описания"),
+            ("create_category", "изменение категории")
+        ]
 
 
 class Contact(models.Model):
@@ -56,3 +64,17 @@ class Blog(models.Model):
     class Meta:
         verbose_name = 'блог'
         verbose_name_plural = 'блоги'
+
+
+class Version(models.Model):
+    product_name = models.ForeignKey(Product, on_delete=models.CASCADE, max_length=100)
+    version_number = models.IntegerField(verbose_name='Номер версии')
+    version_name = models.CharField(max_length=100, verbose_name='Название версии')
+    current_version = models.BooleanField(default=True, verbose_name='Признак текущей версии')
+
+    def __str__(self):
+        return f'{self.version_number}, {self.version_name}, {self.product_name}, {self.current_version}'
+
+    class Meta:
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'
