@@ -10,7 +10,8 @@ from django.urls import reverse_lazy
 from django.utils.text import slugify
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
-from catalog.models import Product, Contact, Blog, Version
+from catalog.models import Product, Contact, Blog, Version, Category
+from catalog.services import get_category_from_cache
 
 
 def test_mail(request):
@@ -41,6 +42,16 @@ class ContactsListView(ListView):
         'list_contact': contact,
         'title': 'Контакты'
     }
+
+
+class CategoryListView(ListView):
+    model = Category
+
+    def get_context_data(self, *args, **kwargs):
+        contex_data = super().get_context_data(**kwargs)
+        contex_data['category'] = get_category_from_cache()
+        contex_data['title'] = f'Категории'
+        return contex_data
 
 
 class ProductListView(ListView):

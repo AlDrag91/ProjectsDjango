@@ -12,15 +12,19 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from django.core.management.commands.runserver import Command as rs
+from dotenv import load_dotenv
+
 rs.default_port='5000'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jllan0r+zod_gt^g-7t+nir-l+eesmn%=l6c_bonhy+m7n^$ky'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,9 +82,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DjangoBD',
-        'USER': 'postgres',
-        'PASSWORD': '',
+        'NAME': os.getenv('DATABASES_NAME'),
+        'USER': os.getenv('DATABASES_USER'),
+        'PASSWORD': os.getenv('DATABASES_PASSWORD'),
     }
 }
 
@@ -137,12 +141,15 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/users/'
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+# Настройки кеш.
+CACHES_ENABLED = os.getenv('CACHES_ENABLED') == 'True'
+if CACHES_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.getenv('CACHES_LOCATION'),
+        }
     }
-}
 
 
 
@@ -153,9 +160,8 @@ EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 # EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'gold777913@yandex.ru'
-EMAIL_HOST_PASSWORD = "xurqrsalsdpqvwef"
-# EMAIL_HOST_PASSWORD ='ousoavmkipmqxioo'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 # получения писем об ошибках сайта
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
